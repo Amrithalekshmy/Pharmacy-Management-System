@@ -27,3 +27,9 @@ class SalesDaily(db.Model):
 
     def __repr__(self):
         return f"<SalesDaily {self.datum}>"
+class MedicinePrice(db.Model):
+    __tablename__ = "medicine_price"
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+    price = db.Column(db.Float)
