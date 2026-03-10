@@ -1,0 +1,45 @@
+<!-- Hey Frontend dev, include this in your dashboard or sales page where you want the analytics chart -->
+
+<!-- Include Chart.js library first in your head tag (or top of the body) -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- The canvas where the chart will be drawn -->
+<div style="width: 60%; margin: auto;">
+    <canvas id="salesChart"></canvas>
+</div>
+
+<script>
+    // Backend dev will pass 'chart_labels' and 'chart_data' from Flask 
+    // Example: labels like ['2023-09', '2023-10'], data like [1500.5, 2300.0]
+    
+    // To make this work dynamically with Flask, you would normally uncomment these:
+    // const labels = {{ chart_labels | safe }};
+    // const dataValues = {{ chart_data | safe }};
+    
+    // Hardcoded example just so you can see how it looks:
+    const labels = ["2024-01", "2024-02", "2024-03"];
+    const dataValues = [1200, 1500, 2100];
+
+    // Chart logic
+    const ctx = document.getElementById('salesChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar', // you can change this to 'line' or 'pie' if you want
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Monthly Revenue ($)',
+                data: dataValues,
+                backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
