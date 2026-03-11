@@ -1,12 +1,4 @@
-/* =====================================================
-   PharmaDesk — script.js
-===================================================== */
 
-/* -------------------------------------------------------
-   DATA
-   Replace this array with a fetch() from your Flask API:
-     const medicines = await fetch('/api/medicines').then(r => r.json());
-------------------------------------------------------- */
 var medicines = [
   { id:1,  name:"Paracetamol 500mg",   mfr:"Cipla Ltd.",       category:"Analgesic",            price:15, qty:320, batch:"A1182", expiry:"2025-08-10", intake:"Take 1–2 tablets every 4–6 hours. Max 8 tablets per day. Can be taken with or without food." },
   { id:2,  name:"Amoxicillin 500mg",   mfr:"Sun Pharma",        category:"Antibiotic",           price:45, qty:120, batch:"B2041", expiry:"2025-06-15", intake:"Take 1 capsule every 8 hours for 5–7 days. Take with food. Complete the full course." },
@@ -21,9 +13,7 @@ var medicines = [
 ];
 
 
-/* -------------------------------------------------------
-   HELPER: returns badge HTML based on stock quantity
-------------------------------------------------------- */
+
 function getStockBadge(qty) {
   if (qty === 0)  return '<span class="badge badge-r">Out of Stock</span>';
   if (qty < 50)   return '<span class="badge badge-a">Low Stock</span>';
@@ -31,9 +21,7 @@ function getStockBadge(qty) {
 }
 
 
-/* -------------------------------------------------------
-   HELPER: shows a toast notification at bottom of screen
-------------------------------------------------------- */
+
 function showToast(msg) {
   var t = document.getElementById("toast");
   t.textContent = msg;
@@ -42,9 +30,6 @@ function showToast(msg) {
 }
 
 
-/* -------------------------------------------------------
-   NAVBAR: switches between the 3 pages
-------------------------------------------------------- */
 function showPage(name) {
   document.querySelectorAll(".page").forEach(function(p) {
     p.classList.remove("active");
@@ -61,9 +46,6 @@ function showPage(name) {
 }
 
 
-/* =======================================================
-   PAGE 1: SEARCH
-======================================================= */
 
 var selectedMed = null;
 var orderQty    = 1;
@@ -74,7 +56,7 @@ var suggestBox  = document.getElementById("suggestions");
 var resultArea  = document.getElementById("result-area");
 
 
-/* shows the dropdown suggestions as user types */
+
 function showSuggestions(query) {
   var matches = medicines.filter(function(m) {
     return m.name.toLowerCase().includes(query.toLowerCase());
@@ -106,7 +88,7 @@ function showSuggestions(query) {
 }
 
 
-/* called when user clicks a suggestion — shows the result card */
+
 function selectMedicine(id) {
   var med = medicines.find(function(m) { return m.id === id; });
   if (!med) return;
@@ -120,7 +102,7 @@ function selectMedicine(id) {
 }
 
 
-/* builds and renders the medicine detail card */
+
 function showResultCard(med) {
   var isAvail = med.qty > 0;
 
@@ -168,7 +150,7 @@ function showResultCard(med) {
 }
 
 
-/* +/- buttons next to the order button */
+
 function changeQty(delta) {
   if (!selectedMed) return;
   orderQty = Math.max(1, Math.min(orderQty + delta, selectedMed.qty));
@@ -177,18 +159,12 @@ function changeQty(delta) {
 }
 
 
-/* order button — deducts qty from stock */
+
 function placeOrder() {
   if (!selectedMed || selectedMed.qty === 0) return;
 
   selectedMed.qty -= orderQty;
 
-  // BACKEND HOOK — uncomment when Flask is ready:
-  // fetch("/api/order", {
-  //   method: "POST",
-  //   headers: { "Content-Type": "application/json" },
-  //   body: JSON.stringify({ medicine_id: selectedMed.id, quantity: orderQty })
-  // });
 
   showToast("Ordered " + orderQty + "x " + selectedMed.name + " — ₹" + (selectedMed.price * orderQty));
   orderQty = 1;
@@ -196,7 +172,6 @@ function placeOrder() {
 }
 
 
-/* typing in the search bar */
 searchInput.addEventListener("input", function() {
   var q = this.value.trim();
   clearBtn.classList.toggle("show", q.length > 0);
@@ -210,7 +185,7 @@ searchInput.addEventListener("input", function() {
   }
 });
 
-/* press Enter to auto-select first suggestion */
+
 searchInput.addEventListener("keydown", function(e) {
   if (e.key === "Enter") {
     var first = suggestBox.querySelector(".sugg-item");
@@ -218,7 +193,7 @@ searchInput.addEventListener("keydown", function(e) {
   }
 });
 
-/* clear button resets the search */
+
 clearBtn.addEventListener("click", function() {
   searchInput.value = "";
   clearBtn.classList.remove("show");
@@ -228,7 +203,7 @@ clearBtn.addEventListener("click", function() {
   searchInput.focus();
 });
 
-/* clicking outside the search bar closes the dropdown */
+
 document.addEventListener("click", function(e) {
   if (!e.target.closest(".search-wrap")) {
     suggestBox.classList.remove("show");
@@ -236,11 +211,7 @@ document.addEventListener("click", function(e) {
 });
 
 
-/* =======================================================
-   PAGE 2: ADD STOCK
-======================================================= */
 
-/* renders the restock table — shows only medicines with qty < 50 */
 function renderRestockTable() {
   var tbody   = document.getElementById("restock-table");
   var lowList = medicines.filter(function(m) { return m.qty < 50; });
@@ -266,7 +237,7 @@ function renderRestockTable() {
 }
 
 
-/* adds stock to a medicine by id */
+
 function restockMedicine(id) {
   var med = medicines.find(function(m) { return m.id === id; });
   if (!med) return;
@@ -276,19 +247,12 @@ function restockMedicine(id) {
 
   med.qty += amount;
 
-  // BACKEND HOOK:
-  // fetch("/api/restock", {
-  //   method: "POST",
-  //   headers: { "Content-Type": "application/json" },
-  //   body: JSON.stringify({ medicine_id: id, add_quantity: amount })
-  // });
-
   showToast("Added " + amount + " units to " + med.name);
   renderRestockTable();
 }
 
 
-/* new medicine form submit */
+
 document.getElementById("add-form").addEventListener("submit", function(e) {
   e.preventDefault(); // remove this line when connecting to Flask
 
@@ -306,29 +270,19 @@ document.getElementById("add-form").addEventListener("submit", function(e) {
 
   medicines.push(newMed);
 
-  // BACKEND HOOK:
-  // fetch("/add_medicine", {
-  //   method: "POST",
-  //   headers: { "Content-Type": "application/json" },
-  //   body: JSON.stringify(newMed)
-  // });
-
   showToast(newMed.name + " added successfully!");
   this.reset();
   renderRestockTable();
 });
 
 
-/* =======================================================
-   PAGE 3: AVAILABLE MEDICINES
-======================================================= */
 
 var activeFilter = "all";
 var activeSearch = "";
 var activeCat    = "";
 
 
-/* renders the 4 stat boxes at the top */
+
 function renderStats() {
   var total   = medicines.length;
   var inStock = medicines.filter(function(m) { return m.qty >= 50; }).length;
@@ -343,7 +297,7 @@ function renderStats() {
 }
 
 
-/* renders medicine cards applying all active filters */
+
 function renderGrid() {
   var data = medicines;
 
@@ -381,7 +335,7 @@ function renderGrid() {
 }
 
 
-/* "View & Order" button on a card — jumps to search page with that medicine selected */
+
 function goSearch(name) {
   showPage("search");
   searchInput.value = name;
@@ -392,19 +346,19 @@ function goSearch(name) {
 }
 
 
-/* search filter input on available page */
+
 document.getElementById("search-filter").addEventListener("input", function() {
   activeSearch = this.value.trim().toLowerCase();
   renderGrid();
 });
 
-/* category dropdown */
+
 document.getElementById("cat-filter").addEventListener("change", function() {
   activeCat = this.value;
   renderGrid();
 });
 
-/* stock status filter buttons */
+
 document.querySelectorAll(".filter-btn").forEach(function(btn) {
   btn.addEventListener("click", function() {
     document.querySelectorAll(".filter-btn").forEach(function(b) { b.classList.remove("active"); });
