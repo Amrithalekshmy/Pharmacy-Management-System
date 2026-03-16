@@ -1,152 +1,83 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Customer Dashboard - Pharmacy</title>
-    <link rel="stylesheet" href="/static/style.css">
-    <style>
-        .header {
-            background-color: #2c3e50;
-            color: #ecf0f1;
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-        }
-        .header h1 {
-            flex-grow: 1;
-        }
-        .logout-btn {
-            background-color: #e74c3c;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-        
-        /* I tried to make it look decent but simple */
-        .med-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-            background: white;
-            box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
-        }
-        .med-table th, .med-table td {
-            padding: 12px;
-            border: 1px solid #ddd;
-            text-align: left;
-        }
-        .med-table th {
-            background-color: #34495e;
-            color: white;
-        }
-        .buy-btn {
-            background-color: #27ae60;
-            color: white;
-            padding: 8px 12px;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: bold;
-        }
-        .buy-btn:hover {
-            background-color: #2ecc71;
-        }
-        .search-container {
-            margin: 20px 0;
-            display: flex;
-            gap: 10px;
-        }
-        .search-container input {
-            padding: 8px;
-            width: 300px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .search-btn {
-            background-color: #3498db;
-            color: white;
-            padding: 8px 15px;
-            border: none;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-        .clear-btn {
-            background-color: #95a5a6;
-            color: white;
-            padding: 8px 15px;
-            text-decoration: none;
-            border-radius: 4px;
-        }
-    </style>
+<title>Customer Dashboard - Pharmacy</title>
+<link rel="stylesheet" href="/static/style.css">
+<style>
+.header { background-color: #2c3e50; color: #ecf0f1; padding: 10px 20px; display: flex; align-items: center; }
+.header h1 { flex-grow: 1; }
+.logout-btn { background-color: #e74c3c; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; }
+.med-table { width: 100%; border-collapse: collapse; margin-top: 15px; background: white; box-shadow: 0px 2px 5px rgba(0,0,0,0.1); }
+.med-table th, .med-table td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+.med-table th { background-color: #34495e; color: white; }
+.buy-btn { background-color: #27ae60; color: white; padding: 8px 12px; text-decoration: none; border-radius: 4px; font-weight: bold; }
+.buy-btn:hover { background-color: #2ecc71; }
+.search-container { margin: 20px 0; display: flex; gap: 10px; }
+.search-container input { padding: 8px; width: 300px; border: 1px solid #ccc; border-radius: 4px; }
+.search-btn { background-color: #3498db; color: white; padding: 8px 15px; border: none; cursor: pointer; border-radius: 4px; }
+.clear-btn { background-color: #95a5a6; color: white; padding: 8px 15px; text-decoration: none; border-radius: 4px; }
+</style>
 </head>
 <body style="background-color: #f9f9f9; font-family: Arial, sans-serif; margin: 0;">
-
-    <div class="header">
-        <h1>Hello User {{ username }}! | Pharmacy Front-End Shop</h1>
-        <a href="/logout" class="logout-btn">Log Out</a>
-    </div>
-
-    <div style="padding: 20px;">
-        
-        <h2>Search Medicines</h2>
-        <div class="search-container">
-            <form action="/search" method="post" style="display: flex; gap: 10px;">
-                <input type="text" name="query" value="{{ query }}" placeholder="Type medicines name..." required>
-                <button type="submit" class="search-btn">🔍 Search</button>
-            </form>
-            <a href="/dashboard" class="clear-btn">Clear</a>
-        </div>
-
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <div style="background-color: #d4edda; color: #155724; padding: 15px; border-radius: 5px; margin-bottom: 20px; border: 1px solid #c3e6cb;">
-            {% for message in messages %}
-                <b>{{ message }}</b>
-            {% endfor %}
-            </div>
-        {% endif %}
-        {% endwith %}
-
-        <h2>Available Medicines List</h2>
-        
-        <table class="med-table">
-            <tr>
-                <th>Item ID</th>
-                <th>Medicine Name</th>
-                <th>Description</th>
-                <th>Price (₹)</th>
-                <th>Current Stock</th>
-                <th>Action</th>
-            </tr>
-            {% for md in medicines %}
-            <tr>
-                <td>{{ md.id }}</td>
-                <td><b>{{ md.name }}</b></td>
-                <td>{{ md.description }}</td>
-                <td>{{ md.price }}</td>
-                <td>
-                    {% if md.stock > 0 %}
-                        <span style="color: green;">{{ md.stock }} (In Stock)</span>
-                    {% else %}
-                        <span style="color: red;">Out of Stock</span>
-                    {% endif %}
-                </td>
-                <td>
-                    {% if md.stock > 0 %}
-                        <a href="/buy/{{ md.id }}" class="buy-btn" onclick="return confirm('Are you sure you want to buy 1 unit of {{ md.name }}?');">Buy 1</a>
-                    {% else %}
-                        <button disabled style="padding: 8px; background: #ccc; border: none; border-radius: 4px;">N/A</button>
-                    {% endif %}
-                </td>
-            </tr>
-            {% else %}
-            <tr>
-                <td colspan="6" style="text-align: center; padding: 20px;">No medicines found matching your search. Try again!</td>
-            </tr>
-            {% endfor %}
-        </table>
-
-    </div>
-
+<div class="header">
+<h1>Hello User {{ username }}! | Pharmacy Front-End Shop</h1>
+<a href="/logout" class="logout-btn">Log Out</a>
+</div>
+<div style="padding: 20px;">
+<h2>Search Medicines</h2>
+<div class="search-container">
+<form action="/search" method="post" style="display: flex; gap: 10px;">
+<input type="text" name="query" value="{{ query }}" placeholder="Type medicines name..." required>
+<button type="submit" class="search-btn">🔍 Search</button>
+</form>
+<a href="/dashboard" class="clear-btn">Clear</a>
+</div>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<div style="background-color: #d4edda; color: #155724; padding: 15px; border-radius: 5px; margin-bottom: 20px; border: 1px solid #c3e6cb;">
+{% for message in messages %}
+<b>{{ message }}</b>
+{% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+<h2>Available Medicines List</h2>
+<table class="med-table">
+<tr>
+<th>Item ID</th>
+<th>Medicine Name</th>
+<th>Description</th>
+<th>Price (₹)</th>
+<th>Current Stock</th>
+<th>Action</th>
+</tr>
+{% for md in medicines %}
+<tr>
+<td>{{ md.id }}</td>
+<td><b>{{ md.name }}</b></td>
+<td>{{ md.description }}</td>
+<td>{{ md.price }}</td>
+<td>
+{% if md.stock > 0 %}
+<span style="color: green;">{{ md.stock }} (In Stock)</span>
+{% else %}
+<span style="color: red;">Out of Stock</span>
+{% endif %}
+</td>
+<td>
+{% if md.stock > 0 %}
+<a href="/buy/{{ md.id }}" class="buy-btn" onclick="return confirm('Are you sure you want to buy 1 unit of {{ md.name }}?');">Buy 1</a>
+{% else %}
+<button disabled style="padding: 8px; background: #ccc; border: none; border-radius: 4px;">N/A</button>
+{% endif %}
+</td>
+</tr>
+{% else %}
+<tr>
+<td colspan="6" style="text-align: center; padding: 20px;">No medicines found matching your search. Try again!</td>
+</tr>
+{% endfor %}
+</table>
+</div>
 </body>
 </html>

@@ -1,49 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Pharmacy Login</title>
-    <!-- I linked the css sheet correctly like students do -->
-    <link rel="stylesheet" href="/static/style.css">
-    <style>
-        /* A little inline style for messages just in case */
-        .flashes {
-            color: red;
-            background: #ffe6e6;
-            padding: 10px;
-            border: 1px solid #ffcccc;
-            border-radius: 5px;
-        }
-    </style>
+<title>Pharmacy Login</title>
+<link rel="stylesheet" href="/static/style.css">
+<style>
+.flashes { color: red; background: #ffe6e6; padding: 10px; border: 1px solid #ffcccc; border-radius: 5px; }
+</style>
 </head>
 <body>
-
-    <div class="login-container">
-        <h2 style="text-align: center; color: #333;">Pharmacy Management System</h2>
-        
-        {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            <ul class="flashes">
-            {% for message in messages %}
-              <li>{{ message }}</li>
-            {% endfor %}
-            </ul>
-          {% endif %}
-        {% endwith %}
-
-        <form action="/login" method="post">
-            <div class="form-group">
-                <label><b>Username:</b></label><br>
-                <input type="text" name="username" placeholder="Enter username..." required>
-            </div>
-            <br>
-            <div class="form-group">
-                <label><b>Password:</b></label><br>
-                <input type="password" name="password" placeholder="Enter password..." required>
-            </div>
-            <br>
-            <button type="submit" class="login-btn">Secure Login</button>
-        </form>
-    </div>
-
+<div class="login-container">
+<h2 style="text-align: center; color: #333;">Pharmacy Management System</h2>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul class="flashes">
+{% for message in messages %}
+<li>{{ message }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+<form action="/login" method="post">
+<div class="form-group">
+<label><b>Username:</b></label><br>
+<input type="text" name="username" placeholder="Enter username..." required>
+</div>
+<br>
+<div class="form-group">
+<label><b>Password:</b></label><br>
+<input type="password" name="password" placeholder="Enter password..." required>
+</div>
+<br>
+<button type="submit" class="login-btn">Secure Login</button>
+</form>
+</div>
 </body>
 </html>

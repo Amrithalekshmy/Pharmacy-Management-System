@@ -1,35 +1,4 @@
-/* style.css - Basic CSS for the pharmacy project */
-
-body {
-    background-color: #f4f4f4;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-.login-container {
-    width: 320px;
-    margin: 50px auto;
-    background: white;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
-}
-
-.login-btn {
-    width: 100%;
-    padding: 10px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.login-btn:hover {
-    background-color: #218838;
-}
-
-/* Rest of the styling is mostly inline in templates for simplicity */
+body { background-color: #f4f4f4; font-family: Arial, sans-serif; margin: 0; padding: 0; }
+.login-container { width: 320px; margin: 50px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0px 4px 8px rgba(0,0,0,0.2); }
+.login-btn { width: 100%; padding: 10px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold; }
+.login-btn:hover { background-color: #218838; }
