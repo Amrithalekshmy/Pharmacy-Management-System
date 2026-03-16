@@ -1,4 +1,21 @@
 # Pharmacy-Management-System
-This Repository includes the project of a pharmacy management System, done by the team PENGUINS of ACM Amritapuri. 
 
-The Pharmacy Management System is a lightweight, web-based application designed to streamline daily pharmacy operations. It provides an intuitive interface to effectively manage medicine inventory, track stock levels, and generate insightful analytics for the business.
+This repository contains the backend code for the user login and management features of our Pharmacy Management System project. It uses Python and Flask.
+
+## Features Developed
+- User and Admin split roles in the backend. 
+- User Dashboard where users can view available medicines and their stock.
+- Real-time search feature for users to filter medicines by name.
+- Buy feature allowing users to decrease stock when purchasing medicines.
+
+## Setting Up To Run
+1. Install Python on your PC.
+2. Install requirements: `pip install -r requirements.txt` (or just `pip install Flask`).
+3. Run the database initialization: `python init_db.py`
+4. Run the web application: `python app.py`
+5. Open `http://127.0.0.1:5000` in your browser.
+
+## Login Details
+For testing the user features:
+**Username**: `user1` or `jeevan`
+**Password**: `pass123` or `1234`
