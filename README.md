@@ -1,21 +1,30 @@
 # Pharmacy-Management-System
 
-This repository contains the backend code for the user login and management features of our Pharmacy Management System project. It uses Python and Flask.
+A full-stack Pharmacy Management System built with Python Flask and MySQL. This project supports both user and admin roles with dedicated dashboards.
 
-## Features Developed
-- User and Admin split roles in the backend. 
-- User Dashboard where users can view available medicines and their stock.
-- Real-time search feature for users to filter medicines by name.
-- Buy feature allowing users to decrease stock when purchasing medicines.
+## Features
+- **User Login & Dashboard**: Users can browse medicines, search by name, and purchase items.
+- **Admin Login & Dashboard**: Admins can view analytics (low stock, restock alerts, inventory value), add new medicines, and delete existing ones.
+- **MySQL Database**: Uses MySQL for persistent data storage with tables for users, medicines, sales, and sale items.
+- **Modern Frontend**: Clean, responsive UI built with DM Sans/DM Serif Display fonts and smooth animations.
+
+## Project Structure
+- `app.py` — Main Flask backend (routes, login, dashboard logic)
+- `init_db.py` — Database initialization script (creates MySQL tables and sample data)
+- `mysqlcodedatabase` — Raw MySQL schema reference
+- `templates/` — Jinja2 HTML templates (login, user dashboard, admin dashboard)
+- `static/` — CSS styles
+- `frontend_pharma/` — Standalone frontend login page (CSS, HTML, JS)
+- `Anagha/` — Admin analytics module (Flask API + data analysis with pandas)
 
 ## Setting Up To Run
 1. Install Python on your PC.
-2. Install requirements: `pip install -r requirements.txt` (or just `pip install Flask`).
-3. Run the database initialization: `python init_db.py`
-4. Run the web application: `python app.py`
-5. Open `http://127.0.0.1:5000` in your browser.
+2. Install MySQL Server and make sure it is running.
+3. Install requirements: `pip install -r requirements.txt`
+4. Run the database initialization: `python init_db.py`
+5. Run the web application: `python app.py`
+6. Open `http://127.0.0.1:5000` in your browser.
 
 ## Login Details
-For testing the user features:
-**Username**: `user1` or `jeevan`
-**Password**: `pass123` or `1234`
+- **Admin**: Username: `admin@gmail.com` | Password: `admin123`
+- **User**: Username: `jeevan@gmail.com` | Password: `jeevan`
