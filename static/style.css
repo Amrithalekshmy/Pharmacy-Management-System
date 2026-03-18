@@ -1,7 +1,3 @@
-/* ================================================
-   style.css — PharmaCare Unified Styles
-   ================================================ */
-
 :root {
   --bg:        #ffffff;
   --card:      #ffffff;
@@ -28,7 +24,6 @@ body {
   overflow: hidden;
 }
 
-/* Scrolling background pattern */
 body::before {
   content: "";
   position: fixed;
@@ -44,7 +39,6 @@ body::before {
   to   { background-position: 0 450px; }
 }
 
-/* ── Login Card ──────────────────────────────────── */
 .auth-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -61,7 +55,6 @@ body::before {
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* ── Left Panel ────────────────────────────────── */
 .auth-panel {
   background: var(--primary);
   padding: 48px 40px;
@@ -89,7 +82,6 @@ body::before {
 }
 .panel-sub { font-size: 14px; opacity: 0.85; line-height: 1.6; color: #e0e0e0; }
 
-/* ── Right Form Panel ──────────────────────────── */
 .auth-form-side {
   padding: 48px 44px;
   display: flex;
@@ -102,7 +94,6 @@ body::before {
 }
 .form-subtitle { font-size: 14px; color: var(--muted); margin-bottom: 28px; }
 
-/* ── Inputs ────────────────────────────────────── */
 .field-group { margin-bottom: 18px; }
 label { display: block; font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 7px; }
 .input-wrap { position: relative; }
@@ -141,14 +132,12 @@ input.error-input {
   color: var(--muted); padding: 4px;
 }
 
-/* ── Field error ───────────────────────────────── */
 .field-error {
   font-size: 12px; color: var(--error);
   margin-top: 5px; display: none;
   animation: fadeIn 0.2s ease;
 }
 
-/* ── Global alert box ──────────────────────────── */
 .alert-box {
   padding: 12px 14px; border-radius: 10px;
   font-size: 13px; margin-bottom: 18px;
@@ -162,7 +151,6 @@ input.error-input {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Extras row ────────────────────────────────── */
 .form-extras {
   display: flex; align-items: center;
   justify-content: space-between;
@@ -173,7 +161,6 @@ input.error-input {
 .forgot-link { color: var(--primary); text-decoration: none; font-weight: 500; }
 .forgot-link:hover { text-decoration: underline; }
 
-/* ── Submit button ─────────────────────────────── */
 .btn-login {
   width: 100%; padding: 13px;
   background: var(--primary); color: #f0f0f0;
@@ -187,7 +174,6 @@ input.error-input {
 .btn-login:active:not(:disabled){ transform: scale(0.98); }
 .btn-login:disabled { opacity: 0.7; cursor: not-allowed; }
 
-/* Loading spinner */
 .btn-login .spinner {
   display: none; width: 18px; height: 18px;
   border: 2px solid rgba(255,255,255,0.4);
@@ -198,17 +184,11 @@ input.error-input {
 .btn-login.loading .btn-text { display: none; }
 .btn-login.loading .spinner  { display: block; }
 
-/* ── Mobile ────────────────────────────────────── */
 @media (max-width: 640px) {
   .auth-wrapper { grid-template-columns: 1fr; }
   .auth-panel   { display: none; }
   .auth-form-side { padding: 36px 28px; }
 }
-
-
-/* ================================================================
-   DASHBOARD STYLES — User & Admin Dashboards
-   ================================================================ */
 
 body.dashboard-body {
   display: block;
@@ -220,7 +200,6 @@ body.dashboard-body::before {
   display: none;
 }
 
-/* ── Dashboard Header ─────────────────────────── */
 .dash-header {
   background: var(--primary);
   color: #f0f0f0;
@@ -269,7 +248,6 @@ body.dashboard-body::before {
 }
 .logout-btn:hover { background: #e74c3c; }
 
-/* ── Dashboard Content ────────────────────────── */
 .dash-content {
   padding: 28px;
   max-width: 1200px;
@@ -286,7 +264,6 @@ body.dashboard-body::before {
   margin-top: 0;
 }
 
-/* ── Flash Messages ───────────────────────────── */
 .dash-alert {
   background: #e8f5ee;
   color: #155724;
@@ -297,7 +274,6 @@ body.dashboard-body::before {
   animation: fadeIn 0.3s ease;
 }
 
-/* ── Search Bar ───────────────────────────────── */
 .search-container {
   display: flex;
   gap: 10px;
@@ -348,7 +324,6 @@ body.dashboard-body::before {
 }
 .clear-btn:hover { background: #7f8c8d; }
 
-/* ── Medicine Table ───────────────────────────── */
 .table-wrap {
   overflow-x: auto;
   border-radius: 12px;
@@ -386,7 +361,6 @@ body.dashboard-body::before {
   background: #e74c3c;
 }
 
-/* Stock badges */
 .stock-in {
   color: var(--success);
   font-weight: 600;
@@ -404,7 +378,6 @@ body.dashboard-body::before {
   font-size: 13px;
 }
 
-/* Action Buttons */
 .buy-btn {
   background: var(--success);
   color: white;
@@ -436,7 +409,6 @@ body.dashboard-body::before {
 }
 .delete-btn:hover { background: #e74c3c; }
 
-/* Restock badge */
 .restock-badge {
   background: #fff3cd;
   color: #856404;
@@ -446,7 +418,6 @@ body.dashboard-body::before {
   font-size: 13px;
 }
 
-/* ── Analytics Cards ──────────────────────────── */
 .analytics-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -484,7 +455,6 @@ body.dashboard-body::before {
   margin-top: 2px;
 }
 
-/* ── Add Medicine Form ────────────────────────── */
 .add-medicine-form {
   background: white;
   padding: 24px;
@@ -525,7 +495,6 @@ body.dashboard-body::before {
 }
 .add-btn:hover { background: #229954; }
 
-/* ── Mobile Dashboard ─────────────────────────── */
 @media (max-width: 768px) {
   .dash-header {
     flex-direction: column;

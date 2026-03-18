@@ -1,14 +1,9 @@
-
-
 CREATE DATABASE IF NOT EXISTS pharmacy_db;
 USE pharmacy_db;
 
 Users Table
 CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50),
-    password VARCHAR(100),
-    role ENUM('admin','user'),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -18,15 +13,7 @@ VALUES ('admin@gmail.com', 'admin123', 'admin');
 INSERT INTO users (username, password, role)
 VALUES ('jeevan@gmail.com', 'jeevan', 'user');
 
- Medicines Table (fixed: id is PRIMARY KEY, name is UNIQUE)
 CREATE TABLE medicines (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) UNIQUE,
-    category VARCHAR(50),
-    manufacturer VARCHAR(100),
-    price DECIMAL(10,2) NOT NULL,
-    expiry_date DATE,
-    stock INT NOT NULL DEFAULT 0
 );
 
 INSERT INTO medicines (name, category, manufacturer, price, expiry_date, stock)
@@ -35,21 +22,11 @@ VALUES
 ('Amoxicillin', 'Capsule', 'Sun Pharma', 20.00, '2026-06-01', 100),
 ('Cough Syrup', 'Liquid',  'Dabur',      50.00, '2026-12-01',  50);
 
- Sales Table
 CREATE TABLE sales (
-    id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50),
-    sale_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    total_amount DECIMAL(10,2)
 );
 
- Sale Items Table
 CREATE TABLE sale_items (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    sale_id INT,
-    medicine_name VARCHAR(100),
-    quantity INT,
-    price DECIMAL(10,2),
     FOREIGN KEY (sale_id) REFERENCES sales(id),
     FOREIGN KEY (medicine_name) REFERENCES medicines(name)
 );

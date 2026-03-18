@@ -51,6 +51,5 @@ def inventory_value():
     result = priceofstockleft()
     return result.to_json()
 
-
 if __name__ == "__main__":
     app.run(debug=True)

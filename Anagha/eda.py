@@ -7,11 +7,9 @@ def get_data():
     conn.close()
     return df
 
-
 def topsellingmedicine():
     df = get_data()
     return df.sort_values(by="stock", ascending=False)
-
 
 def lowstock():
     df = get_data()
@@ -25,9 +23,7 @@ def highestpricedmedicine():
     df = get_data()
     return df.sort_values(by="price", ascending=False)
 
-
 def priceofstockleft():
     df = get_data()
     df["value"] = df["price"] * df["stock"]
     return df["value"].sum()
-

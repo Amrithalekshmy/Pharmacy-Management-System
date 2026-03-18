@@ -32,7 +32,6 @@
   {% endif %}
   {% endwith %}
 
-  <!-- Analytics Cards -->
   <h2 class="dash-title">Analytics Overview</h2>
   <div class="analytics-cards">
     <div class="stat-card">
@@ -65,7 +64,6 @@
     </div>
   </div>
 
-  <!-- Add Medicine Form -->
   <h2 class="dash-title">Add New Medicine</h2>
   <div class="add-medicine-form">
     <form action="/add-medicine" method="post" class="medicine-form">
@@ -83,7 +81,6 @@
     </form>
   </div>
 
-  <!-- Top Selling Medicines (by stock) -->
   <h2 class="dash-title">Top Medicines by Stock</h2>
   <div class="table-wrap">
   <table class="med-table">
@@ -112,7 +109,6 @@
   </table>
   </div>
 
-  <!-- Highest Priced Medicines -->
   <h2 class="dash-title">Highest Priced Medicines</h2>
   <div class="table-wrap">
   <table class="med-table">
@@ -139,7 +135,6 @@
   </table>
   </div>
 
-  <!-- Low Stock Alerts -->
   {% if low_stock %}
   <h2 class="dash-title">⚠️ Low Stock Alerts (Stock &lt; 40)</h2>
   <div class="table-wrap">
@@ -166,7 +161,6 @@
   </div>
   {% endif %}
 
-  <!-- Restock Needed -->
   {% if restock %}
   <h2 class="dash-title">🔴 Restock Needed (0 &lt; Stock &lt; 20)</h2>
   <div class="table-wrap">
@@ -193,7 +187,6 @@
   </div>
   {% endif %}
 
-  <!-- All Medicines with Delete -->
   <h2 class="dash-title">Manage All Medicines</h2>
   <div class="table-wrap">
   <table class="med-table">

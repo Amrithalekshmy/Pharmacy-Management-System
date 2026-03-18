@@ -11,7 +11,6 @@
 
 <div class="auth-wrapper">
 
-  <!-- ── Left Panel ── -->
   <div class="auth-panel">
     <div class="brand">
       <div class="brand-icon">🧑‍⚕️</div>
@@ -23,17 +22,14 @@
     </div>
   </div>
 
-  <!-- ── Right Form Panel ── -->
   <div class="auth-form-side">
     <h1 class="form-title">Sign In</h1>
     <p class="form-subtitle">Enter your credentials to continue</p>
 
-    <!-- Alert box: JS fills this with success/error messages -->
     <div class="alert-box" id="alertBox"></div>
 
     <form id="loginForm" novalidate>
 
-      <!-- Email field -->
       <div class="field-group">
         <label for="email">Email address</label>
         <div class="input-wrap">
@@ -45,7 +41,6 @@
         <div class="field-error" id="emailError">Please enter a valid email address.</div>
       </div>
 
-      <!-- Password field -->
       <div class="field-group">
         <label for="password">Password</label>
         <div class="input-wrap">
@@ -58,7 +53,6 @@
         <div class="field-error" id="passwordError">Password must be at least 6 characters.</div>
       </div>
 
-      <!-- Remember me + Forgot password -->
       <div class="form-extras">
         <label class="remember">
           <input type="checkbox" id="rememberMe"/> Remember me
@@ -66,7 +60,6 @@
         <a href="#" class="forgot-link">Forgot password?</a>
       </div>
 
-      <!-- Submit button -->
       <button type="submit" class="btn-login" id="submitBtn">
         <span class="btn-text">Sign In</span>
         <div class="spinner"></div>
@@ -77,7 +70,6 @@
 
 </div>
 
-<!-- JS goes at bottom so HTML loads first -->
 <script src="login.js"></script>
 </body>
 </html>
